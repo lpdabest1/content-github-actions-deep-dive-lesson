@@ -13,7 +13,7 @@ jobs:
       BUCKET_NAME: nonprodlabdemo
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: configure aws cli
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -26,7 +26,7 @@ jobs:
           node-version: 16
       - name: build site
         run: |
-          npm5 ci
-          npm5 run build
+          npm ci
+          npm run build
       - name: deploy files to bucket
         run: aws s3 cp public s3://${{ env.BUCKET_NAME }} --recursive --acl public-read
